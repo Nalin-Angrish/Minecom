@@ -14,7 +14,7 @@ A Minecraft community management system.
 ### For backend
 5. Install all python requirements by running `pip install -r requirements.txt`. You can also use a [virtual environment](https://docs.python.org/3/library/venv.html) if you have a lot of projects that require different versions of different libraries.
 6. Whenever there is a database schema change, you need to run `python3 manage.py makemigrations` and `python3 manage.py migrate`.
-7. To run the server, run `python3 manage.py runserver 8080`. This will run the backend on `http://localhost:8080/`.
+7. To run the server, run `python3 manage.py runserver`. This will run the backend on `http://localhost:8000/`.
 
 ### For frontend
 5. Move into the `frontend` directory.
@@ -24,7 +24,8 @@ A Minecraft community management system.
 ## Studying the file structure
 - `manage.py`: Django controlling script. This is used to interact with the django application.
 - `db.sqlite3`: Database.
-- `minecom`: This is the main folder containing the files for the backend.
+- `minecom`: This is the app folder for containing the app settings and parameters.
+- `backend`: This is the main folder containing the files for the backend.
 - `frontend`: This is the main folder containing the files for the frontend.
 
 ### How next.js pages work
