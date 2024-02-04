@@ -17,14 +17,14 @@ export default function App(){
           <Link text="Creations" goto="/creations"/>
         </div>
         <div className="flex w-[15%] justify-evenly">
-          <div className="g_id_signin mr-8"
+          {/* <div className="g_id_signin mr-8"
               data-type="standard"
               data-shape="pill"
               data-theme="filled_black"
               data-text="continue_with"
               data-size="large"
               data-logo_alignment="left">
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="h-[100vh] flex place-items-center">

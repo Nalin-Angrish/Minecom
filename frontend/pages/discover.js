@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { FaTimes, FaSearch } from 'react-icons/fa';
+import Link from 'next/link';
 
 const defaultServers = [
   { id: 1, name: 'Minecraft', image:'/serverImage/minecraft.png', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", ip:"192.168.0.1:5555", member:"1000/5000", categories: ['Category 1', 'Category 2'] },
@@ -66,10 +67,12 @@ export default function Discover({ servers }){
 
     return (
         <main>
-        {/* // Top header */}
+        {/* Top header */}
         <h1 className="text-center font-bold text-green-700 text-7xl p-5">
             Minecom Servers
         </h1> 
+
+        <Link href='/server/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create Server</Link>
 
         {/* Input Box and category selector*/}
         <div className='w-full flex justify-center items-center gap-10'>
@@ -97,7 +100,7 @@ export default function Discover({ servers }){
 
 
         {filteredServers.length > 0 ? (
-            <div className="flex grid grid-cols-5 gap-0 p-0 mx-auto justify-center place-items-center">
+            <div className="grid grid-cols-5 gap-0 p-0 mx-auto justify-center place-items-center">
                 {filteredServers.map(server => (
                     <Server 
                         Key={server.id} 
@@ -105,7 +108,7 @@ export default function Discover({ servers }){
                         ImageLink={server.image} 
                         Description={server.description} 
                         Ip={server.ip} 
-                        Member={server.member}
+                        MaxPlayers={server.max_players}
                         onClick={() => handleServerClick(server)}
                     />
                 ))}
@@ -120,7 +123,7 @@ export default function Discover({ servers }){
                     ImageLink={selectedServer.image} 
                     Description={selectedServer.description} 
                     Ip={selectedServer.ip} 
-                    Member={selectedServer.member} 
+                    MaxPlayers={selectedServer.max_players} 
                     onClose={closePopup}
                     isOpen={selectedServer !== null}
                 />
@@ -131,7 +134,7 @@ export default function Discover({ servers }){
     )
 };
 
-const Server = ( {Key, ServerName,  ImageLink, Description, Ip, Member, onClick} ) => {
+const Server = ( {Key, ServerName,  ImageLink, Description, Ip, MaxPlayers, onClick} ) => {
 
 
 
@@ -140,14 +143,14 @@ const Server = ( {Key, ServerName,  ImageLink, Description, Ip, Member, onClick}
    
    {/* The server grid cards */}
     <div onClick={onClick} className="w-64 my-8 hover:translate-y-0.5 hover:shadow-md hover:shadow-black transition-all ease-linear bg-gray-800 rounded-lg group">
-        <img src={ImageLink} alt="Server Icon" className="w-full h-32 rounded-t-lg object-cover" />
+        <img src={ImageLink || 'https://via.placeholder.com/250x150'} alt="Server Icon" className="w-full h-32 rounded-t-lg object-cover" />
         
         <div className="w-full h-44 relative">
             <p className="text-xl font-bold px-8 py-4">{ServerName}</p>
-            <p className="text-m px-8">{Description}</p>
-            <div className="p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
+            <p className="text-m px-8 h-full overflow-hidden">{Description}</p>
+            <div className="font-thin text-gray-400 p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
                 <p>{Ip}</p>
-                <p className="text-right w-full">{Member}</p>
+                <p className="text-right w-full">Max Players: {MaxPlayers}</p>
             </div>
         </div>
     </div>
@@ -158,7 +161,7 @@ const Server = ( {Key, ServerName,  ImageLink, Description, Ip, Member, onClick}
 }
 
 
-const ServerPopup = ({ ServerName, ImageLink, Description, Ip, Member, onClose, isOpen }) => {
+const ServerPopup = ({ ServerName, ImageLink, Description, Ip, MaxPlayers, onClose, isOpen }) => {
     if (!isOpen) {
         return null;
     }
@@ -184,7 +187,7 @@ const ServerPopup = ({ ServerName, ImageLink, Description, Ip, Member, onClose, 
                 <p className="text-center font-bold text-xl">{ServerName}</p>
                 <p><strong>Server Description:</strong> {Description}</p>
                 <p><strong>Server Ip:</strong> {Ip}</p>
-                <p><strong>Server Member:</strong> {Member}</p>
+                <p><strong>Max Players:</strong> {MaxPlayers}</p>
                 <button onClick={onClose} className="bg-red-500 p-2 rounded text-white">Close</button>
             </div>
             </div>
@@ -195,10 +198,10 @@ const ServerPopup = ({ ServerName, ImageLink, Description, Ip, Member, onClose, 
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`${process.env.BACKEND}/server/get`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/server/get`)
   const servers = (await res.json())['servers']
 
   // Pass data to the page via props
-  // console.log(servers)
+  console.log(servers)
   return { props: { servers } }
 }

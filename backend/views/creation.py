@@ -5,19 +5,21 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from ..models import Creation
-from ._util import get_data
+from ._util import get_data, get_user, get_user_and_data
 
 @csrf_exempt
 def create_creation(req):
     """
     Create a new creation
     """
-    user, data = get_data(req)
+    user, data = get_user_and_data(req)
+    if user is None:
+        return JsonResponse({'message': 'You are not authorized to create a creation!'}, status=403)
     creation = Creation.objects.create(
         name=data['name'],
         description=data['description'],
-        author=user
     )
+    creation.author.set([user])
     creation.save()
 
     user.creations.add(creation)
@@ -30,7 +32,7 @@ def get_creations(req):
     """
     Get all creations
     """
-    user, _ = get_data(req)
+    user = get_user(req)
     creations = Creation.objects.filter(author=user)
     return JsonResponse({
         'message': 'Creations fetched successfully!',
@@ -49,7 +51,7 @@ def delete_creation(req):
     """
     Delete a creation
     """
-    user, data = get_data(req)
+    data = get_data(req)
     creation = Creation.objects.get(id=data['creation_id'])
     creation.delete()
     return JsonResponse({'message': 'Creation deleted successfully!'})
@@ -59,7 +61,7 @@ def update_creation(req):
     """
     Update a creation
     """
-    user, data = get_data(req)
+    data = get_data(req)
     creation = Creation.objects.get(id=data['creation_id'])
     creation.name = data['name']
     creation.description = data['description']
@@ -89,7 +91,7 @@ def get_creation(req):
     """
     Get a creation
     """
-    _, data = get_data(req)
+    data = get_data(req)
     creation = Creation.objects.get(id=data['creation_id'])
     return JsonResponse({
         'message': 'Creation fetched successfully!',
@@ -105,7 +107,7 @@ def get_user_creations(req):
     """
     Get all creations for a user
     """
-    user, _ = get_data(req)
+    user = get_user(req)
     return JsonResponse({
         'message': 'Creations fetched successfully!',
         'creations': [
