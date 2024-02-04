@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { FaTimes, FaSearch } from 'react-icons/fa';
 import { useRouter } from 'next/router'
 import '@uiw/react-markdown-editor/markdown-editor.css';
+import Link from 'next/link';
 
 const defaultServers = [
   { id: 1, user: "Nalin Angrish", name: 'Nallu Iron Farm', image:'iron_farm.jpg', description:"Gaming is more fun when shared with friends! Forge new connections, exchange ideas, and build lasting friendships within our Minecraft community. You never know, your next in-game ally might be just a click away.", categories: ['Category 1', 'Category 2'] },
@@ -18,10 +19,8 @@ const defaultServers = [
   // ...
 ]
 
-export default function Creations(){
+export default function Creations({servers}){
     const router = useRouter()
-
-    const servers = defaultServers
 
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
@@ -56,7 +55,7 @@ export default function Creations(){
 
     // Add a function to select a server
     const handleServerClick = (server) => {
-        console.log(server.id)
+        console.log(server.name)
         router.push('creations/'+server.id)
     };
 
@@ -72,6 +71,8 @@ export default function Creations(){
         <h1 className="text-center font-bold text-green-700 text-7xl p-5">
             Minecom Creations
         </h1> 
+
+        <Link href='/creations/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create creation</Link>
 
         {/* Input Box and category selector*/}
         <div className='w-full flex justify-center items-center gap-10'>
@@ -125,14 +126,15 @@ const Server = ( {ServerName,  ImageLink, Description, Member, onClick} ) => {
     <div className='w-full h-full'>
    
    {/* The server grid cards */}
-    <div onClick={onClick} className="w-64 my-8 hover:translate-y-0.5 hover:shadow-md hover:shadow-black transition-all ease-linear bg-gray-800 rounded-lg group">
-        <img src={ImageLink} alt="Server Icon" className="w-full h-32 rounded-t-lg object-cover" />
+   <div onClick={onClick} className="w-64 my-8 hover:translate-y-0.5 hover:shadow-md hover:shadow-black transition-all ease-linear bg-gray-800 rounded-lg group">
+        <img src={ImageLink || 'https://via.placeholder.com/250x150'} alt="Server Icon" className="w-full h-32 rounded-t-lg object-cover" />
         
         <div className="w-full h-44 relative">
             <p className="text-xl font-bold px-8 py-4">{ServerName}</p>
-            <div className="text-m px-8"><ReactMarkdown children={Description}  className='Markdown' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}/></div>
-            <div className="p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
-                <p>Created by: <b>{Member}</b></p>
+            <p className="text-m px-8 h-full overflow-hidden">{Description}</p>
+            <div className="font-thin text-gray-400 p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
+                <p>Created By</p>
+                <p className="text-right">{Member}</p>
             </div>
         </div>
     </div>
