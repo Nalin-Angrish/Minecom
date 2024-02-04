@@ -1,118 +1,87 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
+import '@uiw/react-markdown-editor/markdown-editor.css';
+import '@uiw/react-markdown-preview/markdown.css';
 
-const inter = Inter({ subsets: ['latin'] })
-
-export default function Home() {
+export default function App(){
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.js</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div>
+      <div className="flex bg-yellow-950 place-items-center justify-between">
+        <div className="flex place-items-center p-1">
+          <img src="logo.png" className="w-10 m-1"></img>
+          <a href="/" class="m-1 bg-gradient-to-r from-red-500 to-green-500 font-bold bg-clip-text text-transparent">MINECOM</a>
+        </div>
+        <div className="flex w-[50%] justify-evenly">
+          <Link text="Discover" goto="/discover"/>
+          <Link text="Projects" goto="/projects"/>
+          <Link text="Creations" goto="/creations"/>
+        </div>
+        <div className="flex w-[15%] justify-evenly">
+          <Link text="Login" goto="/login"/>
+          <Link text="Signup" goto="/signup"/>
         </div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className="h-[92vh] flex place-items-center">
+        <div className='text-center px-32 flex flex-col justify-evenly place-items-center w-1/2 h-[100%]'>
+          <p className=" text-6xl">M I N E C O M</p>
+          <p>Welcome to <b>MINECOM</b>, the ultimate destination for Minecraft enthusiasts seeking like-minded players to embark on exciting adventures together! If you're passionate about crafting, building, and exploring the blocky world of Minecraft, you've come to the right place.</p>
+        </div>
+        <img src="minecraftgirls.jpeg" className="w-1/3 h-1/2"></img>
       </div>
+      {/* <img src="wood.jpg" className="absolute w-[100%] h-[51%] -z-10 opacity-80 blur-[2px]"></img> */}
+      {/* <div className="flex justify-center"> */}
+      {/* <Box content="Want to showcase your minecraft creations and flex, or get ideas from others?" BTNtext="Look Creations"/>
+      <Box content="Want people with similar minds like you to share experiences or hang out with?" BTNtext="Join Community"/>
+      <img src="wood.jpg" className="absolute w-[100%] h-[51%] -z-10 opacity-80 blur-[2px]"></img>
+      <Box content="Want to hop into other players servers by finding them or publish your own?" BTNtext="Look Servers"/>
+      <Box content="Want to host your own minecraft Project or collaborate with others?" BTNtext="Find Projects"/> */}
+      {/* </div> */}
+      <Section add="flex-row-reverse bg-gradient-to-l from-blue-50 to-blue-950" heading="🎮 Find Your Minecraft Crew:" content="Are you tired of solo adventures in Minecraft? Connect with a vibrant community of players who share your passion. Whether you're into survival, creative mode, or unique modded experiences, our platform is the perfect hub to discover fellow gamers eager to team up and conquer the virtual realm together." image="1.jpg" grad_dir="img_right"/>
+      <Section add="bg-gradient-to-r from-red-50 to-red-950" heading="🌐 Diverse Communities Await:" content="Explore various Minecraft communities tailored to different playstyles and interests. From hardcore survivalists to creative builders, we have a place for everyone. Browse through our diverse selection of groups and connect with players who match your gaming preferences." image="2.jpg" grad_dir="img_left"/>
+      <Section add="flex-row-reverse bg-gradient-to-l from-yellow-50 to-yellow-950" heading="🤝 Make New Friends:" content="Gaming is more fun when shared with friends! Forge new connections, exchange ideas, and build lasting friendships within our Minecraft community. You never know, your next in-game ally might be just a click away." image="3.jpg" grad_dir="img_right"/>
+      <Section add="bg-gradient-to-r from-red-50 to-red-950" heading="🏰 Showcase Your Creations:" content="Are you a master builder? Share your awe-inspiring creations with a community that appreciates the art of construction. Whether it's an elaborate castle, a bustling city, or a redstone masterpiece, get ready for your virtual architecture to be celebrated." image="4.jpg" grad_dir="img_left"/>
+      <Section add="flex-row-reverse bg-gradient-to-l from-blue-50 to-blue-950" heading="🚀 Organize Events and Competitions:" content="Take your Minecraft experience to the next level by participating in or organizing events and competitions. From epic PvP battles to friendly build-offs, there's always something exciting happening in our community." image="5.jpg" grad_dir="img_right"/>
+      <Section add="bg-gradient-to-r from-red-50 to-red-950" heading="🌍 Global Reach, Local Connections:" content="Connect with players from around the world or find fellow enthusiasts in your local area. Our platform facilitates both global and local connections, making it easy for you to build a community that suits your preferences." image="6.jpg" grad_dir="img_left"/>
+      <Section add="flex-row-reverse bg-gradient-to-l from-blue-50 to-blue-950" heading="🛠️ Modded Madness:" content="If you love exploring Minecraft with mods, you're not alone! Join our modded Minecraft communities to share your favorite modpacks, discover new ones, and embark on thrilling adventures in custom-tailored game worlds." image="7.jpg" grad_dir="img_right"/>
+    </div>
+  )
+}
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+const MarkdownEditor = dynamic(
+  () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
+  { ssr: false }
+);
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+const Box = ({content,BTNtext}) => {
+  return (
+    <div className="opacity-85 hover:opacity-100 hover:scale-105  duration-300 flex flex-col justify-evenly mt-10 px-10 w-[15%] h-[40vh] rounded-xl bg-gradient-to-b from-yellow-400 to-yellow-50 text-black shadow-sm shadow-yellow-50">
+      <img src="photo.jpg"></img>
+      <p className="text-center">
+        {content}
+      </p>
+      <button className="py-1 text-sm  border-yellow-950 bg-gradient-to-r duration-300 via-yellow-400 from-yellow-600 to-yellow-950 hover:bg-gradient-to-t hover:transition-all rounded-xl shadow-md shadow-black font-bold">
+        {BTNtext}
+      </button>
+    </div>
+  )
+}
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
+const Section = ({add, heading, content, image, grad_dir}) => {
+  return (
+    <div className={`text-black h-[70vh] flex place-items-center ${add}`}>
+        
+        <div className='text-center px-32 flex flex-col justify-evenly place-items-center w-1/2 h-[100%]'>
+        <p className=" text-6xl">{heading}</p>
+        <p>{content}</p>
+        </div>
+        <img className={`h-[70vh] w-[50%] ${grad_dir}`} src={image}></img>
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
+  )
+}
+
+const Link = ({text, goto}) =>{
+  return (
+    <a href={goto} className="hover:text-yellow-400 hover:underline">{text}</a>
   )
 }
