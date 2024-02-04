@@ -6,7 +6,7 @@ import '@uiw/react-markdown-preview/markdown.css';
 export default function App(){
   return (
     <div>
-      <div className="flex bg-yellow-950 place-items-center justify-between">
+      <div className="fixed z-10 opacity-80 w-[100%] flex bg-gradient-to-r via-yellow-950 from-red-950 to-red-950 place-items-center justify-between">
         <div className="flex place-items-center p-1">
           <img src="logo.png" className="w-10 m-1"></img>
           <a href="/" class="m-1 bg-gradient-to-r from-red-500 to-green-500 font-bold bg-clip-text text-transparent">MINECOM</a>
@@ -21,28 +21,20 @@ export default function App(){
           <Link text="Signup" goto="/signup"/>
         </div>
       </div>
-      <div className="h-[92vh] flex place-items-center">
+      <div className="h-[100vh] flex place-items-center">
         <div className='text-center px-32 flex flex-col justify-evenly place-items-center w-1/2 h-[100%]'>
-          <p className=" text-6xl">M I N E C O M</p>
+          <p className="text-6xl">M I N E C O M</p>
           <p>Welcome to <b>MINECOM</b>, the ultimate destination for Minecraft enthusiasts seeking like-minded players to embark on exciting adventures together! If you're passionate about crafting, building, and exploring the blocky world of Minecraft, you've come to the right place.</p>
         </div>
         <img src="minecraftgirls.jpeg" className="w-1/3 h-1/2"></img>
       </div>
-      {/* <img src="wood.jpg" className="absolute w-[100%] h-[51%] -z-10 opacity-80 blur-[2px]"></img> */}
-      {/* <div className="flex justify-center"> */}
-      {/* <Box content="Want to showcase your minecraft creations and flex, or get ideas from others?" BTNtext="Look Creations"/>
-      <Box content="Want people with similar minds like you to share experiences or hang out with?" BTNtext="Join Community"/>
-      <img src="wood.jpg" className="absolute w-[100%] h-[51%] -z-10 opacity-80 blur-[2px]"></img>
-      <Box content="Want to hop into other players servers by finding them or publish your own?" BTNtext="Look Servers"/>
-      <Box content="Want to host your own minecraft Project or collaborate with others?" BTNtext="Find Projects"/> */}
-      {/* </div> */}
-      <Section add="flex-row-reverse bg-gradient-to-l from-blue-50 to-blue-950" heading="🎮 Find Your Minecraft Crew:" content="Are you tired of solo adventures in Minecraft? Connect with a vibrant community of players who share your passion. Whether you're into survival, creative mode, or unique modded experiences, our platform is the perfect hub to discover fellow gamers eager to team up and conquer the virtual realm together." image="1.jpg" grad_dir="img_right"/>
-      <Section add="bg-gradient-to-r from-red-50 to-red-950" heading="🌐 Diverse Communities Await:" content="Explore various Minecraft communities tailored to different playstyles and interests. From hardcore survivalists to creative builders, we have a place for everyone. Browse through our diverse selection of groups and connect with players who match your gaming preferences." image="2.jpg" grad_dir="img_left"/>
-      <Section add="flex-row-reverse bg-gradient-to-l from-yellow-50 to-yellow-950" heading="🤝 Make New Friends:" content="Gaming is more fun when shared with friends! Forge new connections, exchange ideas, and build lasting friendships within our Minecraft community. You never know, your next in-game ally might be just a click away." image="3.jpg" grad_dir="img_right"/>
-      <Section add="bg-gradient-to-r from-red-50 to-red-950" heading="🏰 Showcase Your Creations:" content="Are you a master builder? Share your awe-inspiring creations with a community that appreciates the art of construction. Whether it's an elaborate castle, a bustling city, or a redstone masterpiece, get ready for your virtual architecture to be celebrated." image="4.jpg" grad_dir="img_left"/>
-      <Section add="flex-row-reverse bg-gradient-to-l from-blue-50 to-blue-950" heading="🚀 Organize Events and Competitions:" content="Take your Minecraft experience to the next level by participating in or organizing events and competitions. From epic PvP battles to friendly build-offs, there's always something exciting happening in our community." image="5.jpg" grad_dir="img_right"/>
-      <Section add="bg-gradient-to-r from-red-50 to-red-950" heading="🌍 Global Reach, Local Connections:" content="Connect with players from around the world or find fellow enthusiasts in your local area. Our platform facilitates both global and local connections, making it easy for you to build a community that suits your preferences." image="6.jpg" grad_dir="img_left"/>
-      <Section add="flex-row-reverse bg-gradient-to-l from-blue-50 to-blue-950" heading="🛠️ Modded Madness:" content="If you love exploring Minecraft with mods, you're not alone! Join our modded Minecraft communities to share your favorite modpacks, discover new ones, and embark on thrilling adventures in custom-tailored game worlds." image="7.jpg" grad_dir="img_right"/>
+      <Section add="flex-row-reverse bg-gradient-to-l from-blue-950 to-blue-400" heading="🎮 Find Your Minecraft Crew:" content="Are you tired of solo adventures in Minecraft? Connect with a vibrant community of players who share your passion. Whether you're into survival, creative mode, or unique modded experiences, our platform is the perfect hub to discover fellow gamers eager to team up and conquer the virtual realm together." image="1.jpg" grad_dir="img_right"/>
+      <Section add="bg-gradient-to-r from-green-950 to-green-400" heading="🌐 Diverse Communities Await:" content="Explore various Minecraft communities tailored to different playstyles and interests. From hardcore survivalists to creative builders, we have a place for everyone. Browse through our diverse selection of groups and connect with players who match your gaming preferences." image="2.jpg" grad_dir="img_left"/>
+      <Section add="flex-row-reverse bg-gradient-to-l from-red-950 to-red-400" heading="🤝 Make New Friends:" content="Gaming is more fun when shared with friends! Forge new connections, exchange ideas, and build lasting friendships within our Minecraft community. You never know, your next in-game ally might be just a click away." image="3.jpg" grad_dir="img_right"/>
+      <Section add="bg-gradient-to-r from-slate-950 to-slate-400" heading="🏰 Showcase Your Creations:" content="Are you a master builder? Share your awe-inspiring creations with a community that appreciates the art of construction. Whether it's an elaborate castle, a bustling city, or a redstone masterpiece, get ready for your virtual architecture to be celebrated." image="4.jpg" grad_dir="img_left"/>
+      <Section add="flex-row-reverse bg-gradient-to-l from-pink-950 to-pink-400" heading="🚀 Organize Events and Competitions:" content="Take your Minecraft experience to the next level by participating in or organizing events and competitions. From epic PvP battles to friendly build-offs, there's always something exciting happening in our community." image="5.jpg" grad_dir="img_right"/>
+      <Section add="bg-gradient-to-r from-yellow-950 to-yellow-400" heading="🌍 Global Reach, Local Connections:" content="Connect with players from around the world or find fellow enthusiasts in your local area. Our platform facilitates both global and local connections, making it easy for you to build a community that suits your preferences." image="6.jpg" grad_dir="img_left"/>
+      <Section add="flex-row-reverse bg-gradient-to-l from-cyan-950 to-cyan-400" heading="🛠️ Modded Madness:" content="If you love exploring Minecraft with mods, you're not alone! Join our modded Minecraft communities to share your favorite modpacks, discover new ones, and embark on thrilling adventures in custom-tailored game worlds." image="7.jpg" grad_dir="img_right"/>
     </div>
   )
 }
@@ -68,7 +60,7 @@ const Box = ({content,BTNtext}) => {
 
 const Section = ({add, heading, content, image, grad_dir}) => {
   return (
-    <div className={`text-black h-[70vh] flex place-items-center ${add}`}>
+    <div className={`h-[70vh] flex place-items-center ${add}`}>
         
         <div className='text-center px-32 flex flex-col justify-evenly place-items-center w-1/2 h-[100%]'>
         <p className=" text-6xl">{heading}</p>
