@@ -1,6 +1,8 @@
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
+import Link from 'next/link';
+import { FaPencilAlt } from 'react-icons/fa';
 
 const Servers = [
     { id: 1, name: 'Minecraft', image:'/serverImage/minecraft.png', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", ip:"192.168.0.1:5555", member:"1000/5000" },
@@ -24,6 +26,9 @@ export default function Profile(){
     <div className="flex flex-col items-center justify-center w-full h-full">
         {/* Blue Top */}
         <div className="bg-blue-500 h-[30vh] w-full absolute top-0"></div>
+
+        {/* Edit Button */}
+        <Link href='/profile/edit' className='absolute z-[1] top-5 right-5 bg-gray-900 rounded-lg h-12 w-12 place-items-center grid'><FaPencilAlt /></Link>
 
         {/* Profile Picture */}
         <div className="pt-[8vh] relative">
