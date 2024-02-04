@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef} from 'react';
 import { FaTimes, FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 export default function Discover({ servers }){
+    const router = useRouter()
+
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredServers, setFilteredServers] = useState(servers);
     
@@ -26,23 +29,15 @@ export default function Discover({ servers }){
       setSearchTerm(event.target.value);
     };
 
-    // Add state for the currently selected server
-    const [selectedServer, setSelectedServer] = useState(null);
-
     // Add a function to select a server
     const handleServerClick = (server) => {
-        setSelectedServer(server);
+        router.push('servers/'+server.id)
     };
 
     // Add a clear filter function
     const clearSearchAndFilter = () => {
         textAreaFocusRef.current.focus();
         setSearchTerm('');
-    };
-    
-    // Add a function to close the popup
-    const closePopup = () => {
-        setSelectedServer(null);
     };
     
 
@@ -92,18 +87,6 @@ export default function Discover({ servers }){
         ) : (
             <p className='text-center text-5xl italic my-14'>No servers found</p>
         )}
-            {/* Render the popup */}
-            {selectedServer && (
-                <ServerPopup 
-                    ServerName={selectedServer.name} 
-                    ImageLink={selectedServer.image} 
-                    Description={selectedServer.description} 
-                    Ip={selectedServer.ip} 
-                    MaxPlayers={selectedServer.max_players} 
-                    onClose={closePopup}
-                    isOpen={selectedServer !== null}
-                />
-            )}
 
         
         </main>
@@ -135,42 +118,6 @@ const Server = ( {Key, ServerName,  ImageLink, Description, Ip, MaxPlayers, onCl
 
     )
 }
-
-
-const ServerPopup = ({ ServerName, ImageLink, Description, Ip, MaxPlayers, onClose, isOpen }) => {
-    if (!isOpen) {
-        return null;
-    }
-
-
-    // Stops closing if clicked on popup
-    const stopPropagation = (event) => {
-        event.stopPropagation();
-    };
-
-    return (
-        <>
-        <div onClick={onClose} className="fixed z-10 top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 transition-opacity duration-200 ease-in-out">
-            <div onClick={stopPropagation} className="relative w-96 h-64 bg-gray-800 p-4 rounded-lg flex flex-col items-center justify-center bounce-open">
-            <div className='absolute inset-0 z-0 rounded-lg' style={{ 
-                backgroundImage: `url(${ImageLink})`, 
-                backgroundSize: 'auto', 
-                backgroundPosition: 'center', 
-                filter: 'brightness(0.5) blur(2px)'}}
-            ></div>
-            {/* Content of bg */}
-            <div className='z-10 flex flex-col items-center justify-center'>
-                <p className="text-center font-bold text-xl">{ServerName}</p>
-                <p><strong>Server Description:</strong> {Description}</p>
-                <p><strong>Server Ip:</strong> {Ip}</p>
-                <p><strong>Max Players:</strong> {MaxPlayers}</p>
-                <button onClick={onClose} className="bg-red-500 p-2 rounded text-white">Close</button>
-            </div>
-            </div>
-        </div>
-        </>
-    );
-            }
 
 export async function getServerSideProps() {
   // Fetch data from external API
