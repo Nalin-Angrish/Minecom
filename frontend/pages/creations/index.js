@@ -19,30 +19,30 @@ const defaultServers = [
   // ...
 ]
 
-export default function Creations({servers}){
+export default function Creations({creations}){
     const router = useRouter()
 
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
-    const [filteredServers, setFilteredServers] = useState(servers);
-    const categories = [...new Set(servers.map(server => server.categories))];
+    const [filteredCreations, setFilteredCreations] = useState(creations);
+    const categories = [...new Set(creations.map(creation => creation.categories))];
   
     // Get the search + text
     useEffect(() => {
-      let filtered = servers;
+      let filtered = creations;
   
       if (selectedCategory) {
-        filtered = filtered.filter(server => server.categories.includes(selectedCategory));
+        filtered = filtered.filter(creation => creation.categories.includes(selectedCategory));
       }
   
       if (searchTerm) {
-        filtered = filtered.filter(server => 
-          server.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          server.description.toLowerCase().includes(searchTerm.toLowerCase())
+        filtered = filtered.filter(creation => 
+          creation.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          creation.description.toLowerCase().includes(searchTerm.toLowerCase())
         );
       }
   
-      setFilteredServers(filtered);
+      setFilteredCreations(filtered);
     }, [selectedCategory, searchTerm]);
   
     const handleCategoryChange = (event) => {
@@ -53,10 +53,10 @@ export default function Creations({servers}){
       setSearchTerm(event.target.value);
     };
 
-    // Add a function to select a server
-    const handleServerClick = (server) => {
-        console.log(server.name)
-        router.push('creations/'+server.id)
+    // Add a function to select a creation
+    const handleCreationClick = (creation) => {
+        console.log(creation.name)
+        router.push('creations/'+creation.id)
     };
 
     // Add a clear filter function
@@ -99,46 +99,52 @@ export default function Creations({servers}){
 
 
 
-        {filteredServers.length > 0 ? (
+        {filteredCreations.length > 0 ? (
             <div className="flex grid grid-cols-5 gap-0 p-0 mx-auto justify-center place-items-center">
-                {filteredServers.map(server => (
-                    <Server 
-                        ServerName={server.name} 
-                        ImageLink={server.image} 
-                        Description={server.description}
-                        Member={server.user}
-                        onClick={() => handleServerClick(server)}
+                {filteredCreations.map(creation => (
+                    <Creation 
+                        CreationName={creation.name} 
+                        ImageLink={creation.image} 
+                        Description={creation.description}
+                        Member={creation.author.username}
+                        onClick={() => handleCreationClick(creation)}
                     />
                 ))}
             </div>
         ) : (
-            <p className='text-center text-5xl italic my-14'>No servers found</p>
+            <p className='text-center text-5xl italic my-14'>No creations found</p>
         )}        
         </main>
     )
 };
 
-const Server = ( {ServerName,  ImageLink, Description, Member, onClick} ) => {
+const Creation = ( {CreationName,  ImageLink, Description, Member, onClick} ) => {
 
 
 
     return (
     <div className='w-full h-full'>
    
-   {/* The server grid cards */}
+   {/* The creation grid cards */}
    <div onClick={onClick} className="w-64 my-8 hover:translate-y-0.5 hover:shadow-md hover:shadow-black transition-all ease-linear bg-gray-800 rounded-lg group">
-        <img src={ImageLink || 'https://via.placeholder.com/250x150'} alt="Server Icon" className="w-full h-32 rounded-t-lg object-cover" />
+        <img src={ImageLink || 'https://via.placeholder.com/250x150'} alt="Creation Icon" className="w-full h-32 rounded-t-lg object-cover" />
         
         <div className="w-full h-44 relative">
-            <p className="text-xl font-bold px-8 py-4">{ServerName}</p>
-            <p className="text-m px-8 h-full overflow-hidden">{Description}</p>
+            <p className="text-xl font-bold px-8 py-4">{CreationName}</p>
+            <div className="text-m px-8 h-full overflow-hidden">
+            <ReactMarkdown 
+        children={Description} 
+        className='Markdown'
+        remarkPlugins={[remarkGfm]}
+        rehypePlugins={[rehypeRaw]} 
+      />
+              </div>
             <div className="font-thin text-gray-400 p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
-                <p>Created By</p>
+                <p>Created By: </p>
                 <p className="text-right">{Member}</p>
             </div>
         </div>
     </div>
-
     </div>
 
     )
@@ -146,10 +152,10 @@ const Server = ( {ServerName,  ImageLink, Description, Member, onClick} ) => {
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/server/get`)
-  const servers = (await res.json())['servers']
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/creation/get_all`)
+  const creations = (await res.json())['creations']
 
   // Pass data to the page via props
-  // console.log(servers)
-  return { props: { servers } }
+  // console.log(creations)
+  return { props: { creations } }
 }

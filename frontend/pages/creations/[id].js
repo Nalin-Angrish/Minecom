@@ -6,15 +6,15 @@ import dynamic from 'next/dynamic';
 import '@uiw/react-markdown-editor/markdown-editor.css';
 import { useRouter } from 'next/router';
 
-export default function Creation({server}){
+export default function Creation({creation}){
     return (
         <main>
             <h1 className="text-center font-bold text-green-700 text-6xl p-5">
-            {server.name}
+            {creation.name}
             </h1> 
-            <Section add="flex-row-reverse bg-gradient-to-l from-slate-950 to-slate-400" content={server.description} image={server.image} grad_dir="img_right"/>
+            <Section add="flex-row-reverse bg-gradient-to-l from-slate-950 to-slate-400" content={creation.description} image={creation.image} grad_dir="img_right"/>
             <div className="bg-slate-950">
-                <p className="text-lg p-2">Created by: <b>{server.member}</b></p>
+                <p className="text-lg p-2">Created by: <b>{creation.author.username}</b></p>
             </div>
         </main>
     )
@@ -37,13 +37,13 @@ export async function getServerSideProps(context) {
     let id = context.params.id;
 
     // Fetch data from external API
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/server/get`)
-    const servers = (await res.json())['servers']
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/creation/get_all`)
+    const creations = (await res.json())['creations']
 
-    for(let server of servers){
-        console.log(server.name)
-        if(server.id==id){
-            return {props: {server}}
+    for(let creation of creations){
+        console.log(creation.name)
+        if(creation.id==id){
+            return {props: {creation}}
         }
     }
 

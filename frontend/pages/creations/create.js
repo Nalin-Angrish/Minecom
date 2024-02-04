@@ -2,18 +2,17 @@ import React,{useState,useRef} from 'react';
 import { parse } from 'cookie';
 import dynamic from 'next/dynamic';
 import '@uiw/react-markdown-editor/markdown-editor.css';
-// import '@uiw/react-markdown-preview/markdown.css';
 
 const MarkdownEditor = dynamic(
   () => import("@uiw/react-markdown-editor").then((mod) => mod.default),
   { ssr: false }
 );
 
-export default function CreateServer(){
+export default function CreateCreation(){
   var updatedMD = "";
 
   const handleClick = (description) => {
-    let form = document.getElementById('createServer');
+    let form = document.getElementById('createCreation');
     let data = new FormData(form);
     data.append('description', description);
     data.append('credential', parse(document.cookie)['credential'])
@@ -21,7 +20,7 @@ export default function CreateServer(){
     data.forEach((value, key) => {json_data[key] = value});
     console.log(json_data);
 
-    fetch(`${process.env.NEXT_PUBLIC_BACKEND}/server/create`, {
+    fetch(`${process.env.NEXT_PUBLIC_BACKEND}/creation/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -30,25 +29,17 @@ export default function CreateServer(){
     }).then(res => res.json()).then(data => {
       console.log(data);
       if(data.success){
-        window.location.href = '/server';
+        window.location.href = '/creations';
       }
     })
   }
 
   return(
     <>
-    <h1 className='text-3xl font-bold text-center my-8'>Create a Server</h1>
-    <form className='flex flex-col w-[90%] mx-auto' id='createServer'>
-      <label htmlFor="name">Server Name</label>
+    <h1 className='text-3xl font-bold text-center my-8'>Create a Creation</h1>
+    <form className='flex flex-col w-[90%] mx-auto' id='createCreation'>
+      <label htmlFor="name">Creation Name</label>
       <input type="text" id="name" name="name" required className='p-2 rounded-md bg-slate-700 text-white' />
-      {/* IP and port */}
-      <label htmlFor="ip">IP Address</label>
-      <input type="text" id="ip" name="ip" required className='p-2 rounded-md bg-slate-700 text-white' />
-      <label htmlFor="port">Port</label>
-      <input type="number" id="port" name="port" required className='p-2 rounded-md bg-slate-700 text-white' />
-      {/* Max Users */}
-      <label htmlFor="maxUsers">Max Players</label>
-      <input type="number" id="max_players" name="max_players" required className='p-2 rounded-md bg-slate-700 text-white' />
       {/* Description */}
       <label htmlFor="description">Description</label>
       
@@ -60,7 +51,7 @@ export default function CreateServer(){
           enablePreview={false}
           name="description"
         />
-      <button type="submit" className=' bg-green-500 my-2 ml-auto px-10 py-2 font-bold rounded-md' onClick={(e)=>{e.preventDefault(); handleClick(updatedMD)}}>Create Server</button>
+      <button type="submit" className=' bg-green-500 my-2 ml-auto px-10 py-2 font-bold rounded-md' onClick={(e)=>{e.preventDefault(); handleClick(updatedMD)}}>Create Creation</button>
     
       <input type="hidden" name="icon" id="" />
     </form>
