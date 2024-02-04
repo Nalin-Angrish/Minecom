@@ -45,7 +45,6 @@ export default function Creations({creations}){
 
     // Add a function to select a creation
     const handleCreationClick = (creation) => {
-        console.log(creation.name)
         router.push('creations/'+creation.id)
     };
 
