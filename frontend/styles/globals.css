@@ -60,3 +60,8 @@ body{
   -webkit-mask-image:-webkit-gradient(linear, right top, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
   mask-image: linear-gradient(to left, rgba(0,0,0,1), rgba(0,0,0,0));
 }
+
+.emoji-mart {
+  background-color: rgb(3, 7, 18) !important;
+  color: rgb(3, 7, 18) !important;
+}

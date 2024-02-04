@@ -17,6 +17,8 @@ export default function Discover({ servers }){
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredServers, setFilteredServers] = useState(servers);
     const categories = [...new Set(servers.map(server => server.categories))];
+    
+    const textAreaFocusRef = useRef(null);
   
     // Get the search + text
     useEffect(() => {
@@ -46,6 +48,7 @@ export default function Discover({ servers }){
 
     // Add a clear filter function
     const clearSearchAndFilter = () => {
+        textAreaFocusRef.current.focus();
         setSearchTerm('');
     };
     
@@ -59,14 +62,16 @@ export default function Discover({ servers }){
         <main>
         {/* Top header */}
         <h1 className="text-center font-bold text-green-700 text-7xl p-5">
-            Minecom Servers
+            Minecom
         </h1> 
 
+        {/* Input Box and category selector and clear/search button */}
         <Link href='/server/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create Server</Link>
 
         {/* Input Box selector*/}
         <div className='w-full flex justify-center items-center gap-10'>
             <input 
+                ref={textAreaFocusRef}
                 type="text" 
                 value={searchTerm} 
                 onChange={handleSearchChange} 
