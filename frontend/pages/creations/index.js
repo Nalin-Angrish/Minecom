@@ -22,18 +22,12 @@ const defaultServers = [
 export default function Creations({creations}){
     const router = useRouter()
 
-    const [selectedCategory, setSelectedCategory] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredCreations, setFilteredCreations] = useState(creations);
-    const categories = [...new Set(creations.map(creation => creation.categories))];
   
     // Get the search + text
     useEffect(() => {
       let filtered = creations;
-  
-      if (selectedCategory) {
-        filtered = filtered.filter(creation => creation.categories.includes(selectedCategory));
-      }
   
       if (searchTerm) {
         filtered = filtered.filter(creation => 
@@ -43,11 +37,7 @@ export default function Creations({creations}){
       }
   
       setFilteredCreations(filtered);
-    }, [selectedCategory, searchTerm]);
-  
-    const handleCategoryChange = (event) => {
-      setSelectedCategory(event.target.value);
-    };
+    }, [searchTerm]);
   
     const handleSearchChange = (event) => {
       setSearchTerm(event.target.value);
@@ -60,9 +50,8 @@ export default function Creations({creations}){
     };
 
     // Add a clear filter function
-    const clearSearchAndFilter = () => {
-        setSearchTerm('');
-        setSelectedCategory('');        //Here empty string represent 'All'
+    const clearSearch = () => {
+        setSearchTerm('');      //Here empty string represent 'All'
     };
 
     return (
@@ -74,7 +63,7 @@ export default function Creations({creations}){
 
         <Link href='/creations/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create creation</Link>
 
-        {/* Input Box and category selector*/}
+        {/* Input Box*/}
         <div className='w-full flex justify-center items-center gap-10'>
             <input 
                 type="text" 
@@ -83,15 +72,8 @@ export default function Creations({creations}){
                 className='p-4 h-12 bg-gray-800 peer text-white rounded-lg w-96 placeholder:italic border-b-2 focus:outline-none' placeholder='Search to oblivion...'
                 /> 
 
-            <select className='h-12 bg-gray-800 dropdown border-b-2 p-2 rounded-lg' value={selectedCategory} onChange={handleCategoryChange} >
-              <option value="">All</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-
-            <button className='w-10 h-10' onClick={clearSearchAndFilter}>
-                {(searchTerm || selectedCategory !== '') ? <FaTimes /> : <FaSearch />}
+            <button className='w-10 h-10' onClick={clearSearch}>
+                {(searchTerm) ? <FaTimes /> : <FaSearch />}
             </button>
         </div>
 
@@ -100,7 +82,7 @@ export default function Creations({creations}){
 
 
         {filteredCreations.length > 0 ? (
-            <div className="flex grid grid-cols-5 gap-0 p-0 mx-auto justify-center place-items-center">
+            <div className="grid grid-cols-5 gap-0 p-0 mx-auto justify-center place-items-center">
                 {filteredCreations.map(creation => (
                     <Creation 
                         CreationName={creation.name} 
@@ -123,7 +105,7 @@ const Creation = ( {CreationName,  ImageLink, Description, Member, onClick} ) =>
 
 
     return (
-    <div className='w-full h-full'>
+    <div w-full h-full>
    
    {/* The creation grid cards */}
    <div onClick={onClick} className="w-64 my-8 hover:translate-y-0.5 hover:shadow-md hover:shadow-black transition-all ease-linear bg-gray-800 rounded-lg group">
