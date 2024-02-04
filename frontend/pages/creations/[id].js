@@ -4,12 +4,9 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import dynamic from 'next/dynamic';
 import '@uiw/react-markdown-editor/markdown-editor.css';
+import { useRouter } from 'next/router';
 
-export default function Creation(){
-    const name = "Nallu Iron Farm"
-    const md = "Gaming is more fun when shared with friends! Forge new connections, exchange ideas, and build lasting friendships within our Minecraft community. You never know, your next in-game ally might be just a click away."
-    const image = "iron_farm.jpg"
-    const user = "Nalin Angrish"
+export default function Creation({ id, name, md, image, user }){
     return (
         <main>
             <h1 className="text-center font-bold text-green-700 text-6xl p-5">
@@ -35,3 +32,14 @@ const Section = ({add, content, image, grad_dir}) => {
       </div>
     )
   }
+
+export async function getServerSideProps(context){
+    let id = context.params.id;
+    
+    const name = "Nallu Iron Farm"
+    const md = "Gaming is more fun when shared with friends! Forge new connections, exchange ideas, and build lasting friendships within our Minecraft community. You never know, your next in-game ally might be just a click away."
+    const image = "../iron_farm.jpg"
+    const user = "Nalin Angrish"
+
+    return { props: { id, name, md, image, user } }
+}
