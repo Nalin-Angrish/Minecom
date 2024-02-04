@@ -122,7 +122,7 @@ const Server = ( {ServerName,  ImageLink, Description, Member, onClick} ) => {
 
 
     return (
-    <div w-full h-full>
+    <div className='w-full h-full'>
    
    {/* The server grid cards */}
     <div onClick={onClick} className="w-64 my-8 hover:translate-y-0.5 hover:shadow-md hover:shadow-black transition-all ease-linear bg-gray-800 rounded-lg group">
@@ -130,7 +130,7 @@ const Server = ( {ServerName,  ImageLink, Description, Member, onClick} ) => {
         
         <div className="w-full h-44 relative">
             <p className="text-xl font-bold px-8 py-4">{ServerName}</p>
-            <p className="text-m px-8"><ReactMarkdown children={Description}  className='Markdown' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}/></p>
+            <div className="text-m px-8"><ReactMarkdown children={Description}  className='Markdown' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}/></div>
             <div className="p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
                 <p>Created by: <b>{Member}</b></p>
             </div>
@@ -144,7 +144,7 @@ const Server = ( {ServerName,  ImageLink, Description, Member, onClick} ) => {
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`${process.env.BACKEND}/server/get`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/server/get`)
   const servers = (await res.json())['servers']
 
   // Pass data to the page via props

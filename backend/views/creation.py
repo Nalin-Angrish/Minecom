@@ -28,35 +28,6 @@ def create_creation(req):
     return JsonResponse({'message': 'Creation created successfully!'})
 
 @csrf_exempt
-def get_creations(req):
-    """
-    Get all creations
-    """
-    user = get_user(req)
-    creations = Creation.objects.filter(author=user)
-    return JsonResponse({
-        'message': 'Creations fetched successfully!',
-        'creations': [
-            {
-                'id': creation.id,
-                'name': creation.name,
-                'description': creation.description
-            }
-            for creation in creations
-        ]
-    })
-
-@csrf_exempt
-def delete_creation(req):
-    """
-    Delete a creation
-    """
-    data = get_data(req)
-    creation = Creation.objects.get(id=data['creation_id'])
-    creation.delete()
-    return JsonResponse({'message': 'Creation deleted successfully!'})
-
-@csrf_exempt
 def update_creation(req):
     """
     Update a creation
@@ -67,6 +38,16 @@ def update_creation(req):
     creation.description = data['description']
     creation.save()
     return JsonResponse({'message': 'Creation updated successfully!'})
+
+@csrf_exempt
+def delete_creation(req):
+    """
+    Delete a creation
+    """
+    data = get_data(req)
+    creation = Creation.objects.get(id=data['creation_id'])
+    creation.delete()
+    return JsonResponse({'message': 'Creation deleted successfully!'})
 
 @csrf_exempt
 def get_all_creations(req):
@@ -80,7 +61,11 @@ def get_all_creations(req):
             {
                 'id': creation.id,
                 'name': creation.name,
-                'description': creation.description
+                'description': creation.description,
+                'author': {
+                    'id': creation.author.all()[0].id,
+                    'username': creation.author.all()[0].username
+                }
             }
             for creation in creations
         ]
@@ -96,9 +81,12 @@ def get_creation(req):
     return JsonResponse({
         'message': 'Creation fetched successfully!',
         'creation': {
-            'id': creation.id,
             'name': creation.name,
-            'description': creation.description
+            'description': creation.description,
+            'author': {
+                'id': creation.author.all()[0].id,
+                'username': creation.author.all()[0].username
+            }
         }
     })
 

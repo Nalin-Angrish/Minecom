@@ -98,6 +98,7 @@ def get_servers(req):
     """
     servers = Server.objects.all()
     return JsonResponse({'servers': [{
+        "id": server.id,
         "name": server.name,
         "ip": server.ip,
         "port": server.port,
@@ -120,3 +121,21 @@ def get_user_owned_servers(req):
     """
     user = get_user(req)
     return JsonResponse({'servers': [server.name for server in user.owned_servers.all()]})
+
+@csrf_exempt
+def get_server(req):
+    """
+    Get a server
+    """
+    data = get_data(req)
+    server = Server.objects.get(id=data['server_id'])
+    return JsonResponse({
+        'message': 'Server fetched successfully!',
+        'server': {
+            'name': server.name,
+            'ip': server.ip,
+            'port': server.port,
+            'max_players': server.max_players,
+            'description': server.description
+        }
+    })

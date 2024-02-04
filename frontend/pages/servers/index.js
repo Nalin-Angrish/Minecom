@@ -14,7 +14,6 @@ const defaultServers = [
 ]
 
 export default function Discover({ servers }){
-    const [selectedCategory, setSelectedCategory] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredServers, setFilteredServers] = useState(servers);
     const categories = [...new Set(servers.map(server => server.categories))];
@@ -22,10 +21,6 @@ export default function Discover({ servers }){
     // Get the search + text
     useEffect(() => {
       let filtered = servers;
-  
-      if (selectedCategory) {
-        filtered = filtered.filter(server => server.categories.includes(selectedCategory));
-      }
   
       if (searchTerm) {
         filtered = filtered.filter(server => 
@@ -35,11 +30,7 @@ export default function Discover({ servers }){
       }
   
       setFilteredServers(filtered);
-    }, [selectedCategory, searchTerm]);
-  
-    const handleCategoryChange = (event) => {
-      setSelectedCategory(event.target.value);
-    };
+    }, [searchTerm]);
   
     const handleSearchChange = (event) => {
       setSearchTerm(event.target.value);
@@ -56,7 +47,6 @@ export default function Discover({ servers }){
     // Add a clear filter function
     const clearSearchAndFilter = () => {
         setSearchTerm('');
-        setSelectedCategory('');        //Here empty string represent 'All'
     };
     
     // Add a function to close the popup
@@ -74,7 +64,7 @@ export default function Discover({ servers }){
 
         <Link href='/server/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create Server</Link>
 
-        {/* Input Box and category selector*/}
+        {/* Input Box selector*/}
         <div className='w-full flex justify-center items-center gap-10'>
             <input 
                 type="text" 
@@ -83,15 +73,8 @@ export default function Discover({ servers }){
                 className='p-4 h-12 bg-gray-800 peer text-white rounded-lg w-96 placeholder:italic border-b-2 focus:outline-none' placeholder='Search to oblivion...'
                 /> 
 
-            <select className='h-12 bg-gray-800 dropdown border-b-2 p-2 rounded-lg' value={selectedCategory} onChange={handleCategoryChange} >
-              <option value="">All</option>
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-
             <button className='w-10 h-10' onClick={clearSearchAndFilter}>
-                {(searchTerm || selectedCategory !== '') ? <FaTimes /> : <FaSearch />}
+                {(searchTerm) ? <FaTimes /> : <FaSearch />}
             </button>
         </div>
 
@@ -198,7 +181,7 @@ const ServerPopup = ({ ServerName, ImageLink, Description, Ip, MaxPlayers, onClo
 
 export async function getServerSideProps() {
   // Fetch data from external API
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/server/get`)
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/server/get_all`)
   const servers = (await res.json())['servers']
 
   // Pass data to the page via props
