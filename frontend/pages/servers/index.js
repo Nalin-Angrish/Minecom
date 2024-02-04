@@ -2,21 +2,9 @@ import React, { useState, useEffect, useRef} from 'react';
 import { FaTimes, FaSearch } from 'react-icons/fa';
 import Link from 'next/link';
 
-const defaultServers = [
-  { id: 1, name: 'Minecraft', image:'/serverImage/minecraft.png', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", ip:"192.168.0.1:5555", member:"1000/5000", categories: ['Category 1', 'Category 2'] },
-  { id: 2, name: 'Bitcoin', image:'/serverImage/bitcoin.jpeg', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", categories: ['Category 1']},
-  { id: 3, name: 'trees', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", categories: ['Category 2']},
-  { id: 4, name: 'WTF?', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", categories: ['Category 2']},
-  { id: 5, name: 'Swag', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", categories: ['Category 2']},
-  { id: 6, name: 'lorem', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", categories: ['Category 2']},
-  { id: 7, name: 'ipsum', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", categories: ['Category 2']},
-  // ...
-]
-
 export default function Discover({ servers }){
     const [searchTerm, setSearchTerm] = useState('');
     const [filteredServers, setFilteredServers] = useState(servers);
-    const categories = [...new Set(servers.map(server => server.categories))];
     
     const textAreaFocusRef = useRef(null);
   
@@ -65,7 +53,7 @@ export default function Discover({ servers }){
             Minecom
         </h1> 
 
-        {/* Input Box and category selector and clear/search button */}
+        {/* Input Box and clear/search button */}
         <Link href='/server/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create Server</Link>
 
         {/* Input Box selector*/}
