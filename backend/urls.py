@@ -21,7 +21,7 @@ urlpatterns = [
     path('creation/create', views.create_creation, name='create_creation'),
     path('creation/update', views.update_creation, name='update_creation'),
     path('creation/delete', views.delete_creation, name='delete_creation'),
-    path('creation/get_all', views.get_creations, name='get_creations'),
+    path('creation/get_all', views.get_all_creations, name='get_creations'),
     path('creation/get', views.get_creation, name='get_creation'),
     path('creation/get_user', views.get_user_creations, name='get_user_creations'),
 ]
