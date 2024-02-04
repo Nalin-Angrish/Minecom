@@ -1,6 +1,11 @@
 import React, { useState, useEffect, useRef} from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import dynamic from 'next/dynamic';
 import { FaTimes, FaSearch } from 'react-icons/fa';
 import { useRouter } from 'next/router'
+import '@uiw/react-markdown-editor/markdown-editor.css';
 
 const defaultServers = [
   { id: 1, user: "Nalin Angrish", name: 'Nallu Iron Farm', image:'iron_farm.jpg', description:"Gaming is more fun when shared with friends! Forge new connections, exchange ideas, and build lasting friendships within our Minecraft community. You never know, your next in-game ally might be just a click away.", categories: ['Category 1', 'Category 2'] },
@@ -125,7 +130,7 @@ const Server = ( {ServerName,  ImageLink, Description, Member, onClick} ) => {
         
         <div className="w-full h-44 relative">
             <p className="text-xl font-bold px-8 py-4">{ServerName}</p>
-            <p className="text-m px-8">{Description}</p>
+            <p className="text-m px-8"><ReactMarkdown children={Description}  className='Markdown' remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}/></p>
             <div className="p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
                 <p>Created by: <b>{Member}</b></p>
             </div>
