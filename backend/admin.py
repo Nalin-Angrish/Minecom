@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import User, Server, Project, Creation, Media
+
+admin.site.register(User)
+admin.site.register(Server)
+admin.site.register(Project)
+admin.site.register(Creation)
+admin.site.register(Media)
