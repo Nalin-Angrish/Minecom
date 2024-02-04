@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from ..models import Server
-from ._util import get_user_and_data, get_user
+from ._util import get_user_and_data, get_user, get_data
 
 @csrf_exempt
 def create_server(req):
@@ -13,15 +13,17 @@ def create_server(req):
     Create a new server
     """
     user, data = get_user_and_data(req)
+    if user is None:
+        return JsonResponse({'message': 'You are not authorized to create a server!'}, status=403)
     server = Server.objects.create(
         name=data['name'],
         ip=data['ip'],
         port=data['port'],
-        owner=user,
         max_players=data['max_players'],
         description=data['description']
     )
     server.users.add(user)
+    server.owner.set([user])
     server.save()
 
     user.owned_servers.add(server)
@@ -51,6 +53,17 @@ def update_server(req):
         server.description = data['description']
     server.save()
     return JsonResponse({'message': 'Server updated successfully!'})
+
+@csrf_exempt
+def delete_server(req):
+    """
+    Delete a server
+    """
+    server = Server.objects.get(id=req.GET['server_id'])
+    # if user != server.owner:
+    #     return JsonResponse({'message': 'You do not have permission to delete this server!'}, status=403)
+    server.delete()
+    return JsonResponse({'message': 'Server deleted successfully!'})
 
 @csrf_exempt
 def join_server(req):
@@ -84,7 +97,13 @@ def get_servers(req):
     Get all servers
     """
     servers = Server.objects.all()
-    return JsonResponse({'servers': [server.name for server in servers]})
+    return JsonResponse({'servers': [{
+        "name": server.name,
+        "ip": server.ip,
+        "port": server.port,
+        "max_players": server.max_players,
+        "description": server.description
+    } for server in servers]})
 
 @csrf_exempt
 def get_user_servers(req):

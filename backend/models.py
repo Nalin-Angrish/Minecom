@@ -23,7 +23,7 @@ class Server(models.Model):
     owner = models.ManyToManyField('User', related_name='ownership')
     users = models.ManyToManyField('User', related_name='server_membership')
     max_players = models.PositiveIntegerField()
-    icon = models.ForeignKey('Media', on_delete=models.DO_NOTHING)
+    icon = models.ForeignKey('Media', on_delete=models.DO_NOTHING, null=True, blank=True)
     description = models.TextField()
 
 class Creation(models.Model):

@@ -3,8 +3,8 @@ import { serialize } from 'cookie';
 export default async function login(req, res) {
     if (req.method === 'POST') {
         // Process a POST request
-        console.log(`${process.env.BACKEND}/login`)
-        let resp = await fetch(`${process.env.BACKEND}/login`, {
+        console.log(`${process.env.NEXT_PUBLIC_BACKEND}/login`)
+        let resp = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/login`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
