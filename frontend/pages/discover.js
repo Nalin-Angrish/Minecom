@@ -70,7 +70,7 @@ export default function Discover(){
         <main>
         {/* // Top header */}
         <h1 className="text-center font-bold text-green-700 text-7xl p-5">
-            Minecom
+            Minecom Servers
         </h1> 
 
         {/* Input Box and category selector*/}

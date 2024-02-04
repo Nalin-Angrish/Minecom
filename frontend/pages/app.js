@@ -39,7 +39,7 @@ export default function App(){
       <ReactMarkdown 
         children={md} 
         className='Markdown'
-        remarkPlugins={[remarkGfm]} 
+        remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw]} 
       />
 
