@@ -1,9 +1,8 @@
 from django.contrib import admin
 
-from .models import User, Server, Project, Creation, Media
+from .models import User, Server, Creation, Media
 
 admin.site.register(User)
 admin.site.register(Server)
-admin.site.register(Project)
 admin.site.register(Creation)
 admin.site.register(Media)

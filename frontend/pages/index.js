@@ -11,14 +11,20 @@ export default function App(){
           <img src="logo.png" className="w-10 m-1"></img>
           <a href="/" class="m-1 bg-gradient-to-r from-red-500 to-green-500 font-bold bg-clip-text text-transparent">MINECOM</a>
         </div>
-        <div className="flex w-[50%] justify-evenly">
+        <div className="flex space-x-16 justify-evenly">
           <Link text="Discover" goto="/discover"/>
-          <Link text="Projects" goto="/projects"/>
+          {/* <Link text="Projects" goto="/projects"/> */}
           <Link text="Creations" goto="/creations"/>
         </div>
         <div className="flex w-[15%] justify-evenly">
-          <Link text="Login" goto="/login"/>
-          <Link text="Signup" goto="/signup"/>
+          <div className="g_id_signin mr-8"
+              data-type="standard"
+              data-shape="pill"
+              data-theme="filled_black"
+              data-text="continue_with"
+              data-size="large"
+              data-logo_alignment="left">
+          </div>
         </div>
       </div>
       <div className="h-[100vh] flex place-items-center">

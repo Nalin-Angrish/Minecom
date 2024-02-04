@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class User(models.Model):
     """
     A user of the Minecom platform. 
@@ -11,8 +10,6 @@ class User(models.Model):
     email = models.EmailField()
     servers = models.ManyToManyField('Server', related_name='server_membership')
     owned_servers = models.ManyToManyField('Server', related_name='ownership')
-    projects = models.ManyToManyField('Project', related_name='project_teams')
-    hosted_projects = models.ManyToManyField('Project', related_name='project_host')
     creations = models.ManyToManyField('Creation', related_name='creation_author')
 
 class Server(models.Model):
@@ -28,17 +25,6 @@ class Server(models.Model):
     max_players = models.PositiveIntegerField()
     icon = models.ForeignKey('Media', on_delete=models.DO_NOTHING)
     description = models.TextField()
-
-class Project(models.Model):
-    """
-    A project on the Minecom platform. 
-    This is linked with the project's media and the users that are part of it.
-    """
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    media = models.ManyToManyField('Media')
-    users = models.ManyToManyField('User', related_name='project_teams')
-    host = models.ManyToManyField('User', related_name='project_host')
 
 class Creation(models.Model):
     """

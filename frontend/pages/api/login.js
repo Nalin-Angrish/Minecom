@@ -18,9 +18,9 @@ export default async function login(req, res) {
           serialize('credential', req.body.credential, { path: '/' }), 
           serialize('g_csrf_token', req.body.g_csrf_token, { path: '/' })
         ]);
-        res.status(200).json({ message: 'Success' });
+        res.redirect('/')
     } else {
         // Handle any other HTTP method
-        res.status(405).json({ message: 'Method Not Allowed' });
+        res.status(405).send('Method Not Allowed');
     }
 }
