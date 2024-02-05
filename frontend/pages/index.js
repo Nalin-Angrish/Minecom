@@ -11,7 +11,7 @@ export default function App(){
           <p className="text-6xl whitespace-nowrap">M I N E C O M</p>
           <p>Welcome to <b>MINECOM</b>, the ultimate destination for Minecraft enthusiasts seeking like-minded players to embark on exciting adventures together! If you're passionate about crafting, building, and exploring the blocky world of Minecraft, you've come to the right place.</p>
         </div>
-        <img src="minecraftgirls.jpeg" className="w-1/3 h-1/2"></img>
+        <img src="minecraftgirls.jpeg" className="w-1/2 img_middle"></img>
       </div>
       <Section add="flex-row-reverse bg-gradient-to-l from-blue-950 to-blue-400" heading="🎮 Find Your Minecraft Crew:" content="Are you tired of solo adventures in Minecraft? Connect with a vibrant community of players who share your passion. Whether you're into survival, creative mode, or unique modded experiences, our platform is the perfect hub to discover fellow gamers eager to team up and conquer the virtual realm together." image="1.jpg" grad_dir="img_right"/>
       <Section add="bg-gradient-to-r from-green-950 to-green-400" heading="🌐 Diverse Communities Await:" content="Explore various Minecraft communities tailored to different playstyles and interests. From hardcore survivalists to creative builders, we have a place for everyone. Browse through our diverse selection of groups and connect with players who match your gaming preferences." image="2.jpg" grad_dir="img_left"/>
