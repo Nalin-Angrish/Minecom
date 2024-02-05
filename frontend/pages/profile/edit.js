@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import '@uiw/react-markdown-editor/markdown-editor.css';
 import { parse } from 'cookie';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 // Used for making sure the MD editor works in nextjs
 const MarkdownEditor = dynamic(
@@ -10,8 +11,9 @@ const MarkdownEditor = dynamic(
     { ssr: false }
   );
 
-export default function ProfileEdit(){
-    var updatedMD = "";
+export default function ProfileEdit({ username, description }){
+    var updatedMD = description;
+    const router = useRouter();
     const handleClick = (description) => {
         let form = document.getElementById('editProfile');
         let data = new FormData(form);
@@ -21,18 +23,16 @@ export default function ProfileEdit(){
         data.forEach((value, key) => {json_data[key] = value});
         console.log(json_data);
     
-    //     fetch(`${process.env.NEXT_PUBLIC_BACKEND}/creation/create`, {
-    //       method: 'POST',
-    //       headers: {
-    //         'Content-Type': 'application/json'
-    //       },
-    //       body: JSON.stringify(json_data)
-    //     }).then(res => res.json()).then(data => {
-    //       console.log(data);
-    //       if(data.success){
-    //         window.location.href = '/creations';
-    //       }
-    //     })
+        fetch(`${process.env.NEXT_PUBLIC_BACKEND}/profile/update`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(json_data)
+        }).then(res => res.json()).then(data => {
+          console.log(data);
+          router.push('/profile');
+        })
        }
     
   
@@ -54,6 +54,7 @@ export default function ProfileEdit(){
               name = "username"
               required
               className='bg-slate-700 text-white p-2 rounded-md'
+              defaultValue={username}
             ></input>
         </div>
         
@@ -77,5 +78,26 @@ export default function ProfileEdit(){
         </form>
       </main>
     )
+
+}
+
+export async function getServerSideProps(context) {
+  let credential = parse(context.req.headers.cookie)['credential']
+  // Fetch data from external API
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/profile/get_current`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ credential }),
+  })
+  const data = (await res.json())['data']
+
+  return { 
+    props: {
+      username: data.username,
+      description: data.description,
+    }
+  }
 
 }

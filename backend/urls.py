@@ -4,7 +4,6 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('login', views.login, name='login'),
 
     # Server Routes
     path('server/create', views.create_server, name='create_server'),
@@ -24,4 +23,9 @@ urlpatterns = [
     path('creation/get_all', views.get_all_creations, name='get_creations'),
     path('creation/get', views.get_creation, name='get_creation'),
     path('creation/get_user', views.get_user_creations, name='get_user_creations'),
+
+    # Profile Routes
+    path('login', views.login, name='login'),
+    path('profile/get_current', views.get_profile, name='get_profile'),
+    path('profile/update', views.update_profile, name='update_profile'),
 ]

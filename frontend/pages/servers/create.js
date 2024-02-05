@@ -1,6 +1,7 @@
 import React,{useState,useRef} from 'react';
 import { parse } from 'cookie';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import '@uiw/react-markdown-editor/markdown-editor.css';
 // import '@uiw/react-markdown-preview/markdown.css';
 
@@ -11,7 +12,7 @@ const MarkdownEditor = dynamic(
 
 export default function CreateServer(){
   var updatedMD = "";
-
+  const router = useRouter();
   const handleClick = (description) => {
     let form = document.getElementById('createServer');
     let data = new FormData(form);
@@ -29,9 +30,7 @@ export default function CreateServer(){
       body: JSON.stringify(json_data)
     }).then(res => res.json()).then(data => {
       console.log(data);
-      if(data.success){
-        window.location.href = '/server';
-      }
+      router.push('/servers');
     })
   }
 

@@ -3,23 +3,24 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import Link from 'next/link';
 import { FaPencilAlt } from 'react-icons/fa';
+import { parse } from 'cookie';
 
-const Servers = [
-    { id: 1, name: 'Minecraft', image:'/serverImage/minecraft.png', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", ip:"192.168.0.1:5555", member:"1000/5000" },
-    { id: 2, name: 'Bitcoin', image:'/serverImage/bitcoin.jpeg', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
-    { id: 3, name: 'trees', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
-    { id: 4, name: 'WTF?', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
-]
-const Creations = [ 
-    { id: 1, name: 'Swag', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
-    { id: 2, name: 'lorem', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
-    { id: 3, name: 'ipsum', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
-    // ...
-  ]
-const User = {name: "triman", username: "triman", image: "https://avatars.githubusercontent.com/u/70213353", description: "# lorem \n ipsum <u>dolor</u> ~~sit~~ on my lap lorem ipsum dolor sit on my lap", email:"trimantuteja@gmail.com"}
+// const Servers = [
+//     { id: 1, name: 'Minecraft', image:'/serverImage/minecraft.png', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap", ip:"192.168.0.1:5555", member:"1000/5000" },
+//     { id: 2, name: 'Bitcoin', image:'/serverImage/bitcoin.jpeg', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
+//     { id: 3, name: 'trees', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
+//     { id: 4, name: 'WTF?', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
+// ]
+// const Creations = [ 
+//     { id: 1, name: 'Swag', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
+//     { id: 2, name: 'lorem', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
+//     { id: 3, name: 'ipsum', image:'https://avatars.githubusercontent.com/u/70213353', description:"lorem ipsum dolor sit on my lap lorem ipsum dolor sit on my lap"},
+//     // ...
+//   ]
+// const User = {name: "triman", username: "triman", image: "https://avatars.githubusercontent.com/u/70213353", description: "# lorem \n ipsum <u>dolor</u> ~~sit~~ on my lap lorem ipsum dolor sit on my lap", email:"trimantuteja@gmail.com"}
 
 
-export default function Profile(){
+export default function Profile({ User, Servers, Creations }){
     return(
     <main className=' overflow-y-auto'>
 
@@ -57,7 +58,7 @@ export default function Profile(){
         <h1 className="text-3xl font-bold">Servers</h1>
     </div>
     <div className="grid grid-cols-5 gap-0 p-0 mx-auto justify-center place-items-center">
-        {Servers.map(Servers => (
+        {Servers.length > 0 ? Servers.map(Servers => (
             <ServerComponent
                 Key={Servers.id} 
                 ServerName={Servers.name} 
@@ -66,14 +67,14 @@ export default function Profile(){
                 Ip={Servers.ip} 
                 MaxPlayers={Servers.max_players}
             />
-        ))}
+        )) : <p className="text-2xl font-bold">No Servers Found</p>}
     </div>
 
     <div className="flex flex-col pl-7 items-start justify-left w-full h-full">
         <h1 className="text-3xl font-bold">Creations</h1>
     </div>
-    <div className="grid grid-cols-5 gap-0 p-0 mx-auto justify-center place-items-center">
-        {Creations.map(Creations => (
+    <div className="grid grid-cols-5 gap-0 p-0 mx-auto justify-center place-items-center mb-8 py-2">
+        {Creations.length > 0 ? Creations.map(Creations => (
             <ServerComponent
                 Key={Creations.id} 
                 ServerName={Creations.name} 
@@ -82,7 +83,7 @@ export default function Profile(){
                 Ip={Creations.ip} 
                 MaxPlayers={Creations.max_players}
             />
-        ))}
+        )) : <p className="text-2xl font-bold">No Creations Found</p>}
     </div>
 
     </main>
@@ -111,4 +112,32 @@ const ServerComponent = ( {Key, ServerName,  ImageLink, Description, Ip, MaxPlay
     </div>
 
     )
+}
+
+export async function getServerSideProps(context) {
+  let credential = parse(context.req.headers.cookie)['credential']
+  // Fetch data from external API
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/profile/get_current`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ credential }),
+  })
+  const data = (await res.json())['data']
+
+  return { 
+    props: {
+      User: {
+        name: data.name,
+        username: data.username,
+        image: data.image,
+        description: data.description,
+        email: data.email
+      },
+      Servers: data.servers,
+      Creations: data.creations,
+    }
+  }
+
 }

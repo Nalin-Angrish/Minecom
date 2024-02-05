@@ -1,6 +1,7 @@
 import React,{useState,useRef} from 'react';
 import { parse } from 'cookie';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import '@uiw/react-markdown-editor/markdown-editor.css';
 
 const MarkdownEditor = dynamic(
@@ -10,7 +11,7 @@ const MarkdownEditor = dynamic(
 
 export default function CreateCreation(){
   var updatedMD = "";
-
+  const router = useRouter();
   const handleClick = (description) => {
     let form = document.getElementById('createCreation');
     let data = new FormData(form);
@@ -28,9 +29,7 @@ export default function CreateCreation(){
       body: JSON.stringify(json_data)
     }).then(res => res.json()).then(data => {
       console.log(data);
-      if(data.success){
-        window.location.href = '/creations';
-      }
+      router.push('/creations');
     })
   }
 

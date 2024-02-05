@@ -8,6 +8,8 @@ class User(models.Model):
     username = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
     email = models.EmailField()
+    image = models.TextField()
+    description = models.TextField()
     servers = models.ManyToManyField('Server', related_name='server_membership')
     owned_servers = models.ManyToManyField('Server', related_name='ownership')
     creations = models.ManyToManyField('Creation', related_name='creation_author')
@@ -23,7 +25,7 @@ class Server(models.Model):
     owner = models.ManyToManyField('User', related_name='ownership')
     users = models.ManyToManyField('User', related_name='server_membership')
     max_players = models.PositiveIntegerField()
-    icon = models.ForeignKey('Media', on_delete=models.DO_NOTHING, null=True, blank=True)
+    icon = models.TextField()
     description = models.TextField()
 
 class Creation(models.Model):
@@ -33,13 +35,5 @@ class Creation(models.Model):
     """
     name = models.CharField(max_length=100)
     description = models.TextField()
-    media = models.ManyToManyField('Media')
+    media = models.TextField()
     author = models.ManyToManyField('User', related_name='creation_author')
-
-class Media(models.Model):
-    """
-    A media file on the Minecom platform.
-    It is used for user's avatars, server icons, project images and creation screenshots.
-    """
-    name = models.CharField(max_length=100)
-    url = models.URLField()
