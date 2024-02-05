@@ -37,7 +37,7 @@ export default function Document() {
             </div> */}
           </div>
         </div>
-
+        <div className='h-14'></div>
         <Main />
         <NextScript />
         <script src="http://accounts.google.com/gsi/client" async></script>
