@@ -124,7 +124,7 @@ const Server = ( {Key, ServerName,  ImageLink, Description, Ip, MaxPlayers, onCl
                 <div className='absolute left-0 bottom-0 w-full h-10 bg-gradient-to-t from-gray-800 to-transparent'></div>
               </div>
 
-            <div className="font-thin text-gray-400 p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
+            <div className="font-thin text-gray-400 p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full rounded">
                 <p>{Ip}</p>
                 <p className="text-right w-full">Max Players: {MaxPlayers}</p>
             </div>
