@@ -37,3 +37,13 @@ class Creation(models.Model):
     description = models.TextField()
     media = models.TextField()
     author = models.ManyToManyField('User', related_name='creation_author')
+
+class Message(models.Model):
+    """
+    A message sent in a chat. 
+    This is linked with the server it belongs to and the user that sent it.
+    """
+    message = models.TextField()
+    author = models.ForeignKey('User', on_delete=models.DO_NOTHING)
+    server = models.ForeignKey('Server', on_delete=models.DO_NOTHING)
+    timestamp = models.DateTimeField(auto_now_add=True)

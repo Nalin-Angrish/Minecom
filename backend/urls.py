@@ -28,4 +28,8 @@ urlpatterns = [
     path('login', views.login, name='login'),
     path('profile/get_current', views.get_profile, name='get_profile'),
     path('profile/update', views.update_profile, name='update_profile'),
+
+    # Chat Routes
+    path('chat/get', views.get_chat, name='get_chat'),
+    path('chat/send', views.send_chat, name='send_chat'),
 ]

@@ -7,6 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from .server import *
 from .creation import *
 from .profile import *
+from .chat import *
 
 def index(_):
     """
