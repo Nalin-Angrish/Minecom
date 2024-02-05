@@ -29,7 +29,10 @@ export default function Profile({ User, Servers, Creations }){
         <div className="bg-blue-500 h-[30vh] w-full absolute top-0"></div>
 
         {/* Edit Button */}
-        <Link href='/profile/edit' className='absolute z-[1] top-5 right-5 bg-gray-900 rounded-lg h-12 w-12 place-items-center grid'><FaPencilAlt /></Link>
+        <Link 
+            href='/profile/edit' 
+            className='absolute z-[1] top-20 right-5 bg-gray-900 rounded-lg h-12 w-12 place-items-center grid'
+        ><FaPencilAlt /></Link>
 
         {/* Profile Picture */}
         <div className="pt-[8vh] relative">

@@ -60,8 +60,9 @@ export default function Creations({creations}){
             Minecom Creations
         </h1> 
 
-        <Link href='/creations/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create creation</Link>
-
+        <div className='mx-auto justify-center items-center flex gap-5 p-5'>
+          <Link href='/creations/create' className='bg-green-500 mx-auto rounded-lg w-44 h-12 text-xl font-bold text-center grid place-content-center'>Add creation</Link>
+        </div>
         {/* Input Box*/}
         <div className='w-full flex justify-center items-center gap-10'>
             <input 

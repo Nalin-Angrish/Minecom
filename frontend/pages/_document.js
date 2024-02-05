@@ -20,7 +20,7 @@ export default function Document() {
 
         <div className="fixed z-10 opacity-80 w-[100%] flex bg-gradient-to-r via-yellow-950 from-red-950 to-red-950 place-items-center justify-between">
           <div className="flex place-items-center p-1">
-            <img src="/logo.png" className="w-10 m-1" />
+            <a href='/'><img src="/logo.png" className="w-10 m-1" /></a>
             <a href="/" className="m-1 bg-gradient-to-r from-red-500 to-green-500 font-bold bg-clip-text text-transparent">MINECOM</a>
           </div>
           <div className="flex space-x-16 justify-evenly h-full">
