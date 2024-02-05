@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h$+lr6k2nh8v5fz=k14fu!rhs(-^fks)jwyxy9b+g1gptd7-c_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['minecom-backend.onrender.com', '127.0.0.1']
 
 
 # Application definition
