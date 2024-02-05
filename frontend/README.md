@@ -24,6 +24,41 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
+## Directory Structure
+```
+frontend
+├── README.md
+├── jsconfig.json
+├── next.config.js
+├── node_modules
+├── package-lock.json
+├── package.json
+├── pages
+│   ├── _app.js
+│   ├── _document.js
+│   ├── api
+│   ├── app.js
+│   ├── creations
+│   ├── index.js
+│   ├── profile
+│   └── servers
+├── postcss.config.js
+├── public
+├── styles
+│   └── globals.css
+└── tailwind.config.js
+```
+
+## Files
+The folder `pages` is wheremost of the pages of the website reside. 
+1. `_document.js` houses the navbar of the website
+2. `servers` houses file for server creation/showcase page
+3. `creations` similar to `servers` but for showcase of creations
+4. `profile` houses the profile frontend and edit pages
+
+The folder `styles` contains the file `globals.css` containing required css for the project.
+
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:

@@ -1,5 +1,14 @@
 # Minecom
-A Minecraft community management system.
+A Minecraft community management system. Tackling the problem of divide in community due to lack of collabrative platforms.
+
+## Demo
+A live demo can be found at the [site](https://minecom.onrender.com/servers).
+
+## Features
+1. Have a [server showcase page](https://minecom.onrender.com/servers) to display the different minecraft server people run
+2. Have a [creations showcase page](https://minecom.onrender.com/servers) to have a common place to display their craeations and get suggestions/feesback
+3. Login system using google authentication, and a [profile page](https://minecom.onrender.com/profile) where details can be customized
+4. Have a per **server [chat](https://minecom.onrender.com/servers/1/chat) system**, so that the members of server can have a common place to talk and engage in different activiites. 
 
 ## Getting Started
 1. Make sure you have the following software installed:
@@ -27,6 +36,9 @@ A Minecraft community management system.
 - `minecom`: This is the app folder for containing the app settings and parameters.
 - `backend`: This is the main folder containing the files for the backend.
 - `frontend`: This is the main folder containing the files for the frontend.
+
+
+
 
 ### How next.js pages work
 Go in `frontend/pages/app.js`. This file is used to get the output for `http://localhost:3000/app`. If we create a file by a name like `frontend/pages/[filename].js`, the file will be used to generate the output for `http://localhost:3000/filename`.  
