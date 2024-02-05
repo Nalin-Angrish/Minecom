@@ -34,6 +34,10 @@ const InputComponent = ({ initialChat, id, myname }) => {
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter' && event.ctrlKey) {
+      setInputValue(inputValue + '\n');
+      document.getElementById("inputBox").value = inputValue + '\n';
+    }
+    else if (event.key === 'Enter') {
       event.preventDefault();
       handleSend(event);
     }
