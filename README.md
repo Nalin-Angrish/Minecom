@@ -2,7 +2,7 @@
 A Minecraft community management system. Tackling the problem of divide in community due to lack of collabrative platforms.
 
 ## Demo
-A live demo can be found at the [site](https://minecom.onrender.com/servers).
+A live demo can be found at the [site](https://minecom.onrender.com/).
 
 ## Features
 1. Have a [server showcase page](https://minecom.onrender.com/servers) to display the different minecraft server people run
