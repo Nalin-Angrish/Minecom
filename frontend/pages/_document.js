@@ -1,5 +1,6 @@
 import { Html, Head, Main, NextScript } from 'next/document'
 import Link from 'next/link';
+import { GiPlagueDoctorProfile } from "react-icons/gi";
 
 export default function Document() {
   return (
@@ -23,10 +24,14 @@ export default function Document() {
             <a href="/" class="m-1 bg-gradient-to-r from-red-500 to-green-500 font-bold bg-clip-text text-transparent">MINECOM</a>
           </div>
           <div className="flex space-x-16 justify-evenly h-full">
-            <Link text="Discover Servers" href="/servers" className='flex items-center h-full'>Discover Servers</Link>
-            <Link text="Discover Creations" href="/creations" className='flex items-center h-full'>Discover Creations</Link>
+            <Link text="Discover Servers" href="/servers" className='flex items-center h-full hover:underline hover:text-yellow-400'>Discover Servers</Link>
+            <Link text="Discover Creations" href="/creations" className='flex items-center h-full hover:underline hover:text-yellow-400'>Discover Creations</Link>
           </div>
           <div className="flex w-[15%] justify-evenly">
+          <div className="flex hover:underline hover:text-yellow-400">
+            <Link text="Profile" href="/profile" className='flex items-center h-full text-xl'>Profile</Link>
+            <GiPlagueDoctorProfile className='mx-2 flex items-center h-full' size={25}/>
+          </div>
             {/* <div className="g_id_signin mr-8"
                 data-type="standard"
                 data-shape="pill"
