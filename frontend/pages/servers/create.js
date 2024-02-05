@@ -68,32 +68,35 @@ export default function CreateServer(){
 
     <form onSubmit={handleSubmit} id='createServer'>
 
+      <div className='grid grid-cols-2'>
       {/* Server Name */}
-      <div className='w-full h-full flex flex-col justify-left items-start gap-4 pl-10 pt-10'>
+      <div className='w-full h-full flex flex-col justify-center items-center gap-4 pl-10 pt-10'>
         <label htmlFor="name" className="text-2xl font-bold">Server Name</label>
         <input type="text" id="name" name="name" required className='p-2 rounded-md bg-slate-700 text-white' />
       </div>
 
       {/* IP */}
-      <div className='w-full h-full flex flex-col justify-left items-start gap-4 pl-10 pt-10'>
+      <div className='w-full h-full flex flex-col justify-center items-center gap-4 pl-10 pt-10 pr-10'>
         <label htmlFor="ip" className="text-2xl font-bold">IP Address</label>
         <input type="text" id="ip" name="ip" required className='p-2 rounded-md bg-slate-700 text-white' />
       </div>
 
-      {/* Port */}
-      <div className='w-full h-full flex flex-col justify-left items-start gap-4 pl-10 pt-10'>
-        <label htmlFor="port" className="text-2xl font-bold">Port</label>
-        <input type="number" id="port" name="port" required className='p-2 rounded-md bg-slate-700 text-white' />
-      </div>
-
       {/* Max Users */}
-      <div className='w-full h-full flex flex-col justify-left items-start gap-4 pl-10 pt-10'>
+      <div className='w-full h-full flex flex-col justify-center items-center gap-4 pl-10 pt-10'>
         <label htmlFor="maxUsers" className="text-2xl font-bold">Max Players</label>
         <input type="number" id="max_players" name="max_players" required className='p-2 rounded-md bg-slate-700 text-white' />
       </div>
 
+      {/* Port */}
+      <div className='w-full h-full flex flex-col justify-center items-center gap-4 pl-10 pt-10 pr-10'>
+        <label htmlFor="port" className="text-2xl font-bold">Port</label>
+        <input type="number" id="port" name="port" required className='p-2 rounded-md bg-slate-700 text-white' />
+      </div>
+      </div>
+
+
       {/* Description */}
-      <div className='w-full h-full flex flex-col justify-left items-start gap-4 pl-10 pt-10'>
+      <div className='w-full h-full flex flex-col justify-center items-center gap-4 pl-10 pt-10'>
       <label htmlFor="description" className="text-2xl font-bold">Description</label>
       
       <MarkdownEditor 
@@ -104,6 +107,7 @@ export default function CreateServer(){
           enablePreview={false}
           name="description"
         />
+
       </div>
      
       <div className='flex pt-10 items-center p-10'>
