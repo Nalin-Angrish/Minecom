@@ -13,6 +13,7 @@ def create_server(req):
     Create a new server
     """
     user, data = get_user_and_data(req)
+    print(data)
     if user is None:
         return JsonResponse({'message': 'You are not authorized to create a server!'}, status=403)
     server = Server.objects.create(
@@ -30,7 +31,6 @@ def create_server(req):
     user.owned_servers.add(server)
     user.servers.add(server)
     user.save()
-    # TODO: Support Server Icon
     return JsonResponse({'message': 'Server created successfully!'})
 
 @csrf_exempt
@@ -104,7 +104,8 @@ def get_servers(req):
         "ip": server.ip,
         "port": server.port,
         "max_players": server.max_players,
-        "description": server.description
+        "description": server.description,
+        "icon": server.icon
     } for server in servers]})
 
 @csrf_exempt

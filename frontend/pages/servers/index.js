@@ -83,7 +83,7 @@ export default function Discover({ servers }){
                     <Server 
                         Key={server.id} 
                         ServerName={server.name} 
-                        ImageLink={server.image} 
+                        ImageLink={server.icon} 
                         Description={server.description} 
                         Ip={server.ip} 
                         MaxPlayers={server.max_players}
