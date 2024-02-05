@@ -6,30 +6,9 @@ import '@uiw/react-markdown-preview/markdown.css';
 export default function App(){
   return (
     <div className="main_bg">
-      <div className="fixed z-10 opacity-80 w-[100%] flex bg-gradient-to-r via-yellow-950 from-red-950 to-red-950 place-items-center justify-between">
-        <div className="flex place-items-center p-1">
-          <img src="logo.png" className="w-10 m-1"></img>
-          <a href="/" class="m-1 bg-gradient-to-r from-red-500 to-green-500 font-bold bg-clip-text text-transparent">MINECOM</a>
-        </div>
-        <div className="flex space-x-16 justify-evenly">
-          <Link text="Discover Servers" goto="/servers"/>
-          {/* <Link text="Projects" goto="/projects"/> */}
-          <Link text="Discover Creations" goto="/creations"/>
-        </div>
-        <div className="flex w-[15%] justify-evenly">
-          {/* <div className="g_id_signin mr-8"
-              data-type="standard"
-              data-shape="pill"
-              data-theme="filled_black"
-              data-text="continue_with"
-              data-size="large"
-              data-logo_alignment="left">
-          </div> */}
-        </div>
-      </div>
       <div className="h-[100vh] flex place-items-center">
         <div className='text-center px-32 flex flex-col justify-evenly place-items-center w-1/2 h-[100%]'>
-          <p className="text-6xl">M I N E C O M</p>
+          <p className="text-6xl whitespace-nowrap">M I N E C O M</p>
           <p>Welcome to <b>MINECOM</b>, the ultimate destination for Minecraft enthusiasts seeking like-minded players to embark on exciting adventures together! If you're passionate about crafting, building, and exploring the blocky world of Minecraft, you've come to the right place.</p>
         </div>
         <img src="minecraftgirls.jpeg" className="w-1/3 h-1/2"></img>
