@@ -54,7 +54,7 @@ export default function Discover({ servers }){
         </h1> 
 
         {/* Input Box and clear/search button */}
-        <Link href='/server/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create Server</Link>
+        <Link href='/servers/create' className='bg-green-500 p-2 rounded text-white mx-auto block w-min text-nowrap my-2 px-5 hover:bg-green-700 transition-all'>Create Server</Link>
 
         {/* Input Box selector*/}
         <div className='w-full flex justify-center items-center gap-10'>
