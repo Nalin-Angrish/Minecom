@@ -1,7 +1,12 @@
 import React, { useState, useEffect, useRef} from 'react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+import dynamic from 'next/dynamic';
 import { FaTimes, FaSearch } from 'react-icons/fa';
+import { useRouter } from 'next/router'
+import '@uiw/react-markdown-editor/markdown-editor.css';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 export default function Discover({ servers }){
     const router = useRouter()
@@ -106,7 +111,17 @@ const Server = ( {Key, ServerName,  ImageLink, Description, Ip, MaxPlayers, onCl
         
         <div className="w-full h-44 relative">
             <p className="text-xl font-bold px-8 py-4">{ServerName}</p>
-            <p className="text-m px-8 h-full overflow-hidden">{Description}</p>
+
+            <div className="text-m px-8 h-[50%] overflow-hidden relative">
+                <ReactMarkdown 
+                    children={Description} 
+                    className='Markdown'
+                    remarkPlugins={[remarkGfm]}
+                    rehypePlugins={[rehypeRaw]} 
+                />
+                <div className='absolute left-0 bottom-0 w-full h-10 bg-gradient-to-t from-gray-800 to-transparent'></div>
+              </div>
+
             <div className="font-thin text-gray-400 p-2 group-hover:flex group-hover:bg-gradient-to-b from-transparent to-gray-900 hidden absolute bottom-0 w-full">
                 <p>{Ip}</p>
                 <p className="text-right w-full">Max Players: {MaxPlayers}</p>
