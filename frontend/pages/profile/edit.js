@@ -12,12 +12,35 @@ const MarkdownEditor = dynamic(
   );
 
 export default function ProfileEdit({ username, description }){
+    const [image, setImage] = useState('');
+
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      const reader = new FileReader();
+  
+      reader.onloadend = () => {
+        setImage(reader.result);
+      };
+  
+      if (file) {
+        reader.readAsDataURL(file);
+      } else {
+        setImage('');
+      }
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // Submit the form. The image is available in the `image` state variable as a base64 string.
+    };  
+
     var updatedMD = description;
     const router = useRouter();
     const handleClick = (description) => {
         let form = document.getElementById('editProfile');
         let data = new FormData(form);
         data.append('description', description);
+        data.append('image', image);
         data.append('credential', parse(document.cookie)['credential'])
         let json_data = {};
         data.forEach((value, key) => {json_data[key] = value});
@@ -45,7 +68,7 @@ export default function ProfileEdit({ username, description }){
         </h1>
         </div>
 
-        <form id="editProfile">
+        <form onSubmit={handleSubmit} id="editProfile">
         <div className='w-full h-full flex flex-col justify-left items-start gap-4 pl-10 pt-10'>
             <label htmlFor="username" className="text-2xl font-bold">Username</label>
             <input
@@ -68,6 +91,16 @@ export default function ProfileEdit({ username, description }){
             enablePreview={false}
             name="description"
           />
+          
+          <div className='flex pt-10 items-center p-10'>
+            <input 
+              type="file" 
+              accept='image/*' 
+              name="image" 
+              id="image" 
+              className='block hover:file:bg-green-700 w-full text-sm file:mr-4 flie:py-2 file:px-4 file:rounded-lg file:bg-slate-700 file:border-0 file:text-white file:h-12' 
+              required/>
+          </div>
         
         <div className='mx-auto justify-center items-center flex gap-5'>
           <Link href="/profile" className="bg-red-500 mx-auto rounded-lg w-44 h-12 text-xl font-bold text-center grid place-content-center">Cancel</Link>
