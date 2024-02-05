@@ -52,5 +52,6 @@ def update_profile(req):
     user, data = get_user_and_data(req)
     user.username = data.get('username', user.username)
     user.description = data.get('description', user.description)
+    user.image = data.get('image', user.image)
     user.save()
     return JsonResponse({'message': 'Success'})

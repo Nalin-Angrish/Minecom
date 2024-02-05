@@ -18,6 +18,7 @@ def create_creation(req):
     creation = Creation.objects.create(
         name=data['name'],
         description=data['description'],
+        media=data['image']
     )
     creation.author.set([user])
     creation.save()
@@ -65,7 +66,8 @@ def get_all_creations(req):
                 'author': {
                     'id': creation.author.all()[0].id,
                     'username': creation.author.all()[0].username
-                }
+                },
+                "image": creation.media
             }
             for creation in creations
         ]
@@ -86,7 +88,8 @@ def get_creation(req):
             'author': {
                 'id': creation.author.all()[0].id,
                 'username': creation.author.all()[0].username
-            }
+            },
+            "image": creation.media
         }
     })
 
@@ -102,7 +105,8 @@ def get_user_creations(req):
             {
                 'id': creation.id,
                 'name': creation.name,
-                'description': creation.description
+                'description': creation.description,
+                "image": creation.media
             }
             for creation in user.creations.all()
         ]

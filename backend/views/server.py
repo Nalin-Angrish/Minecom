@@ -20,7 +20,8 @@ def create_server(req):
         ip=data['ip'],
         port=data['port'],
         max_players=data['max_players'],
-        description=data['description']
+        description=data['description'],
+        icon=data['image'],
     )
     server.users.add(user)
     server.owner.set([user])
